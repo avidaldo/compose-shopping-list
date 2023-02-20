@@ -21,7 +21,10 @@ fun MainScreen() {
 
         ShoppingList(
             list = viewModel.list,
-            onCloseElement = { viewModel.remove(it) },
+            onChangeChekedItem = {
+                viewModel.changeProductChecked(it)
+            },
+            onCloseItem = { viewModel.remove(it) },
             Modifier.padding(paddingValues),
         )
     }

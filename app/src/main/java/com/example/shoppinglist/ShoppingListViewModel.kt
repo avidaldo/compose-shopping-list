@@ -11,6 +11,12 @@ class ShoppingListViewModel : ViewModel() {
     fun remove(item: ShoppingProduct) {
         _list.remove(item)
     }
+
+    fun changeProductChecked(item: ShoppingProduct){
+        //list.find {it.key=item.key}?.let {  }
+        item.checked = !item.checked
+    }
+
 }
 
 /**
