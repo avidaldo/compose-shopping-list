@@ -61,7 +61,7 @@ dependencies {
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_ui_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_ui_version"
 
-    /** Dependencia para poder utilizar las utiilidades de ViewModel en Compose
+    /** Dependencia para poder utilizar las utilidades de ViewModel en Compose
      * https://developer.android.com/jetpack/androidx/releases/lifecycle
      */
     def lifecycle_version = "2.5.1"

@@ -1,10 +1,9 @@
 package com.example.shoppinglist
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
-import androidx.compose.runtime.Composable
+import androidx.compose.material.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -13,24 +12,23 @@ import com.example.listatareas.R
 @Composable
 fun MainScreen() {
 
-    val viewModel: ShoppingListViewModel = viewModel()  // (2)
+    val viewModel: ShoppingListViewModel = viewModel()
 
     Scaffold(
         topBar = { TopAppBar(title = { Text(stringResource(R.string.app_name)) }) }
     ) { paddingValues ->
 
-        ShoppingList(
-            list = viewModel.list,
-            onChangeChekedItem = {
-                viewModel.changeProductChecked(it)
-            },
-            onCloseItem = { viewModel.remove(it) },
-            Modifier.padding(paddingValues),
-        )
+        Column(Modifier.padding(paddingValues)) {
+
+            AddBlock { viewModel.add(ShoppingProduct(it)) }
+            ShoppingList(
+                list = viewModel.list,
+                onCloseItem = { viewModel.remove(it) },
+            )
+
+        }
+
+
     }
 }
 
-/**
- * (2) Podemos acceder a nuestro ViewModel desde cualquier función composable llamando a la
- * función viewModel(), pero para ello necesitamos incorpor la dependencia (ver build.gradle).
- */

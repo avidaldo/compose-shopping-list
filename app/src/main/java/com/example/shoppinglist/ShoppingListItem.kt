@@ -10,30 +10,14 @@ import androidx.compose.material.icons.filled.Close
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-
-
-@Composable
-fun ShoppingListItem(
-    shoppingElement: ShoppingProduct,
-    onChangeChecked: (ShoppingProduct) -> Unit,
-    onClose: (ShoppingProduct) -> Unit,
-) {
-
-    ShoppingListItem(
-        elementName = shoppingElement.name,
-        checked = shoppingElement.checked,
-        onCheckedChange = { onChangeChecked(shoppingElement) },
-        onClose = { onClose(shoppingElement) },
-    )
-}
+import com.example.listatareas.R
 
 
 @Composable
 fun ShoppingListItem(
     elementName: String,
-    checked: Boolean,
-    onCheckedChange: (Boolean) -> Unit,
     onClose: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -52,9 +36,8 @@ fun ShoppingListItem(
                     .weight(1f)
                     .padding(start = 16.dp)
             )
-            Checkbox(checked = checked, onCheckedChange = onCheckedChange)
             IconButton(onClick = onClose) {
-                Icon(Icons.Filled.Close, contentDescription = "Close")
+                Icon(Icons.Filled.Close, contentDescription = stringResource(R.string.close))
             }
         }
 
