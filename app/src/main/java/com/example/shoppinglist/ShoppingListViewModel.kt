@@ -20,7 +20,7 @@ class ShoppingListViewModel : ViewModel() {
 }
 
 /**
- * Definimos una propiedad interna _list que solo será modificable desde dentro del ViewModel y
+ * (1) Definimos una propiedad interna _list que solo será modificable desde dentro del ViewModel y
  * otra list, que será la que expongamos hacia fuera (pública y de solo lectura).
  * Esto se hace para no poder modificar la lista desde fuera del ViewModel.
  *

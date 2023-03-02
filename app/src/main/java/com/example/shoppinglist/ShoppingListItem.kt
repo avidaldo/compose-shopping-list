@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 
-@Composable
+/*@Composable
 fun ShoppingListItem(
     shoppingElement: ShoppingProduct,
     onChangeChecked: (ShoppingProduct) -> Unit,
@@ -26,7 +26,7 @@ fun ShoppingListItem(
         onCheckedChange = { onChangeChecked(shoppingElement) },
         onClose = { onClose(shoppingElement) },
     )
-}
+}*/
 
 
 @Composable

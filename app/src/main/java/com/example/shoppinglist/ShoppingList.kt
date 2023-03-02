@@ -16,7 +16,8 @@ fun ShoppingList(
     LazyColumn(modifier) {
         items(
             items = list,
-            key = { it.key })
+            //key = { it.key }
+            )
         { element ->
             ShoppingListItem(
                 elementName = element.name,
