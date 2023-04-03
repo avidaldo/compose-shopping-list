@@ -14,6 +14,7 @@ import com.example.shoppinglist.ui.state.ShoppingProduct
 @Composable
 fun MainScreen() {
     val viewModel: ShoppingListViewModel = viewModel()  // (1)
+    val shoppingList by viewModel.list.collectAsState()
 
     Scaffold(
         topBar = { TopAppBar(title = { Text(stringResource(R.string.app_name)) }) }
@@ -23,16 +24,10 @@ fun MainScreen() {
 
             AddBlock { viewModel.add(it) }
             ShoppingList(
-                list = viewModel.list,
+                list = shoppingList,
                 onChangeChecked = { viewModel.changeChecked(it) },
                 onRemoveItem = { viewModel.remove(it) },
             )
         }
     }
 }
-
-/**
- * (1) Podemos acceder a nuestro ViewModel desde cualquier función composable llamando a la
- * función viewModel(), pero para ello necesitamos incorpor la dependencia (ver build.gradle).
- *
- */

@@ -10,7 +10,7 @@ import com.example.shoppinglist.ui.state.ShoppingProduct
 @Composable
 fun ShoppingList(
     list: List<ShoppingProduct>,
-    onChangeChecked: (ShoppingProduct) -> Unit,
+    onChangeChecked: (Int) -> Unit,
     onRemoveItem: (ShoppingProduct) -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -19,7 +19,7 @@ fun ShoppingList(
             ShoppingListItem(
                 productName = product.productName,
                 checked = product.checked,
-                onChangeChecked = { onChangeChecked(product) },
+                onChangeChecked = { onChangeChecked(product.key) },
                 onClose = { onRemoveItem(product) })
         }
     }
