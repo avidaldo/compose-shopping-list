@@ -21,7 +21,7 @@ fun MainScreen() {
 
         Column(Modifier.padding(paddingValues)) {
 
-            AddBlock { viewModel.add(ShoppingProduct(it)) }
+            AddBlock { viewModel.add(it) }
             ShoppingList(
                 list = viewModel.list,
                 onChangeChecked = { viewModel.changeChecked(it) },

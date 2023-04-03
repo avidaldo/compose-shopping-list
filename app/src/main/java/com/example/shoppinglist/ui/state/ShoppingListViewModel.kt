@@ -8,9 +8,14 @@ class ShoppingListViewModel : ViewModel() {
     //    .apply { addAll(getDummyShoppingProducts()) }  // (2)
     val list get() = _list  // (1)
 
-    fun add(item: ShoppingProduct) {
-        _list.add(item)
-    }
+    private fun add(item: ShoppingProduct) =
+        _list.add(item) // (3)
+
+    fun add(productString: String) =  // (4)
+        if (_list.none { productString == it.productName })
+            add(ShoppingProduct(productString))
+        else false  // (3)
+
 
     fun remove(item: ShoppingProduct) {
         _list.remove(item)
@@ -54,4 +59,45 @@ init { list.addAll(getDummyShoppingProducts()) }
  * donde init define un bloque que se ejecuta al instanciar la clase (simplifica sobreescribir el
  * constructor)
  *
- */
+ *
+ * (3)
+ *
+ * Aplico la lógica de las collections en Java: el método add de cualquier colection devuelve true
+ * si esa colección de datos ha cambiado tras la operación. En una lista, siempre devuelde true, pero
+ * en un Set (conjunto) devolvería false si ese elemento ya pertenece al Set ya que, por definición,
+ * un conjunto no permite elementos duplicados.
+ *
+ * https://stackoverflow.com/questions/24173117/why-does-list-adde-return-boolean-while-list-addint-e-returns-void
+ *
+ * Por eso en este caso opto por devolver false si el elemento ya devuelve en la lista.
+ *
+ * Podría hacerse más explícito utilizando una excepción personalizada:
+ *
+fun addListElement(item: ShoppingListProduct) {
+    shoppingList.find { item.productName == it.productName }?.let {
+        throw ProductAlreadyExistsException()
+    } ?: shoppingList.add(item)
+}
+class ProductAlreadyExistsException : RuntimeException()
+ *
+ * Además, para mejorar la legibilidad, en lugar de find, utilizo la función none:
+ * https://kotlinlang.org/docs/collection-filtering.html#test-predicates
+ *
+ * Se está, por tanto, utilizando una lista y superponiéndole la lógica de un Set. Cabría plantearse
+ * entonces utilizar directamente un Set. Sin embargo, no he encontrado que exista un "mutableStateSet".
+ *
+ * Imagino que será posible utilizar un Set encapsulado con LiveData o Flows (TODO)
+ *
+ *
+ * (4)
+ *  Misma función en estilo imperativo:
+
+fun addProductImperativeStyle(productString: String): Boolean {
+    if (_list.none { productString == it.productName })
+        return add(ShoppingProduct(productString))
+    else return false
+}
+
+ *
+ *
+*/
