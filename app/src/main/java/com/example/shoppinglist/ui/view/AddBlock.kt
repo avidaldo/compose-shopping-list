@@ -1,4 +1,4 @@
-package com.example.shoppinglist
+package com.example.shoppinglist.ui.view
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
