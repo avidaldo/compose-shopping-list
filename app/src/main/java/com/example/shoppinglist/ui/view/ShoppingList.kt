@@ -11,7 +11,7 @@ import com.example.shoppinglist.ui.state.ShoppingProduct
 fun ShoppingList(
     list: List<ShoppingProduct>,
     onChangeChecked: (Int) -> Unit,
-    onRemoveItem: (ShoppingProduct) -> Unit,
+    onRemoveItem: (Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     LazyColumn(modifier) {
@@ -20,7 +20,7 @@ fun ShoppingList(
                 productName = product.productName,
                 checked = product.checked,
                 onChangeChecked = { onChangeChecked(product.key) },
-                onClose = { onRemoveItem(product) })
+                onClose = { onRemoveItem(product.key) })
         }
     }
 }

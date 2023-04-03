@@ -4,17 +4,20 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import java.nio.file.Files.find
 
 class ShoppingListViewModel : ViewModel() {
 
     private val _list = MutableStateFlow(listOf<ShoppingProduct>())
+
     // TODO: getDummyShoppingProducts()
     val list = _list.asStateFlow()
 
     private fun add(item: ShoppingProduct) {
         _list.update {
             it.toMutableList().apply {
-                add(item) }
+                add(item)
+            }
         } // TODO: ¿cómo hago que la función devuelva el resultado del add?
     }
 
@@ -25,11 +28,28 @@ class ShoppingListViewModel : ViewModel() {
         } else false
 
 
-    fun remove(item: ShoppingProduct) {  // TODO: lo normal sería recibir la key... pero funciona
+/*    fun remove(item: ShoppingProduct) {  // TODO: lo normal sería recibir la key, pero también funciona así
         _list.update {
             it.toMutableList().apply { remove(item) }
         }
+    }*/
+
+    fun remove(key: Int) {
+        _list.update { currentState ->
+            currentState.toMutableList().apply {
+                find { it.key == key }?.also { remove(it) }
+                    ?: throw RuntimeException("List element not found")
+            }
+        }
     }
+
+/*    fun changeChecked(item: ShoppingProduct) {
+        _list.update { currentState ->
+            currentState.toMutableList().apply {
+                    item.checked = !item.checked
+            }
+        }
+    }*/
 
     fun changeChecked(key: Int) {  // (1)
         //product.checked = !product.checked
@@ -53,7 +73,5 @@ class ShoppingListViewModel : ViewModel() {
  * la estructura interna. De hecho, por eso se declara como List y no como MutableList; el modelo
  * de estado que recibe StateFlow debe ser inmutable para garantizar que siempre se actualice
  * creando un elemento nuevo (con update).
- *
- * Por el mismo motivo, lo que se recibe no debe ser la TODO...
  *
  */
