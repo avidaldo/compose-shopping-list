@@ -35,11 +35,11 @@ class ShoppingListViewModel : ViewModel() {
         }
     }
 
-/*    fun remove(item: ShoppingProduct) {  // TODO: también funciona así
+    fun remove(item: ShoppingProduct) {  // TODO: también funciona así
         _list.update {
             it.toMutableList().apply { remove(item) }
         }
-    }*/
+    }
 
     fun changeChecked(key: Int) {
         _list.update { currentState ->
@@ -52,13 +52,13 @@ class ShoppingListViewModel : ViewModel() {
         }
     }
 
-/*    fun changeChecked(item: ShoppingProduct) {
+    fun changeChecked(item: ShoppingProduct) {
         _list.update { currentState ->
             currentState.toMutableList().apply {
                     item.checked = !item.checked
             }
         }
-    }*/
+    }
 
 }
 

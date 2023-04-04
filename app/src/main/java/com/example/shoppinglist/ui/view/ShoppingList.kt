@@ -4,13 +4,14 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import com.example.shoppinglist.ui.state.ShoppingListViewModel
 import com.example.shoppinglist.ui.state.ShoppingProduct
 
 
 @Composable
 fun ShoppingList(
     list: List<ShoppingProduct>,
-    onChangeChecked: (Int) -> Unit,
+    onChangeChecked: (ShoppingProduct) -> Unit,
     onRemoveItem: (Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -19,7 +20,7 @@ fun ShoppingList(
             ShoppingListItem(
                 productName = product.productName,
                 checked = product.checked,
-                onChangeChecked = { onChangeChecked(product.key) },
+                onChangeChecked = { onChangeChecked(product) },
                 onClose = { onRemoveItem(product.key) })
         }
     }

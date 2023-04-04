@@ -23,6 +23,7 @@ data class ShoppingProduct(
  * de estado que recibe StateFlow debe ser inmutable para garantizar que siempre se actualice
  * creando un elemento nuevo (con update).
  *
+ *
  * (2)
  * Kotlin utiliza companion objects para encapsular miembros de clase (lo que en java serían static).
  * Se trata de un objeto que acompaña a la clase y por tanto contiene todos lo miembros de clase,
