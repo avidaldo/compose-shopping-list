@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.update
 
 class ShoppingListViewModel : ViewModel() {
 
-    private val _list = MutableStateFlow(listOf<ShoppingProduct>())
+    private val _list = MutableStateFlow(listOf<ShoppingProduct>())  // (1)
     // TODO: getDummyShoppingProducts()
     val list = _list.asStateFlow()
 
@@ -26,17 +26,28 @@ class ShoppingListViewModel : ViewModel() {
         } else false
 
 
-/*    fun remove(item: ShoppingProduct) {  // TODO: lo normal sería recibir la key, pero también funciona así
-        _list.update {
-            it.toMutableList().apply { remove(item) }
-        }
-    }*/
-
     fun remove(key: Int) {
         _list.update { currentState ->
             currentState.toMutableList().apply {
                 find { it.key == key }?.also { remove(it) }
                     ?: throw RuntimeException("List element not found")
+            }
+        }
+    }
+
+/*    fun remove(item: ShoppingProduct) {  // TODO: también funciona así
+        _list.update {
+            it.toMutableList().apply { remove(item) }
+        }
+    }*/
+
+    fun changeChecked(key: Int) {
+        _list.update { currentState ->
+            currentState.toMutableList().apply {
+                find { it.key == key }?.apply {
+                    this.checked = !this.checked
+                } ?: throw RuntimeException("List element not found")
+
             }
         }
     }
@@ -49,27 +60,11 @@ class ShoppingListViewModel : ViewModel() {
         }
     }*/
 
-    fun changeChecked(key: Int) {  // (1)
-        //product.checked = !product.checked
-
-        _list.update { currentState ->
-            currentState.toMutableList().apply {
-                find { it.key == key }?.apply {
-                    this.checked = !this.checked
-                } ?: throw RuntimeException("List element not found")
-
-            }
-        }
-    }
-
 }
 
+
 /**
- * (1)
- * Antes checkedState era un MutableState. Al usar StateFlow, cada vez que se cambia algo se crea
- * una copia entera de la lista forzando que se detecte el cambio de estado por compleja que sea
- * la estructura interna. De hecho, por eso se declara como List y no como MutableList; el modelo
+ * (1) Dentro del StateFlow, se declara como List y no como MutableList; el modelo
  * de estado que recibe StateFlow debe ser inmutable para garantizar que siempre se actualice
  * creando un elemento nuevo (con update).
- *
  */
