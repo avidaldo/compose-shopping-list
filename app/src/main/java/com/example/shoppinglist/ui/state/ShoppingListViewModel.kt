@@ -64,12 +64,4 @@ class ShoppingListViewModel : ViewModel() {
 
 }
 
-/**
- * (1)
- * Antes checkedState era un MutableState. Al usar StateFlow, cada vez que se cambia algo se crea
- * una copia entera de la lista forzando que se detecte el cambio de estado por compleja que sea
- * la estructura interna. De hecho, por eso se declara como List y no como MutableList; el modelo
- * de estado que recibe StateFlow debe ser inmutable para garantizar que siempre se actualice
- * creando un elemento nuevo (con update).
- *
- */
+

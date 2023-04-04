@@ -9,7 +9,7 @@ data class ShoppingProduct(
     val productName: String,
     val key: Int = identifier.incrementAndGet(), // (3)
 ) {
-    var checked by mutableStateOf(false)   // (1)
+    var checked by mutableStateOf(false)
 
     companion object { // (2)
         val identifier: AtomicInteger = AtomicInteger(0)  // (3)
@@ -20,11 +20,6 @@ data class ShoppingProduct(
 }
 
 /**
- * (1) La clase ShoppingProduct tiene la definición de key y name como propiedades inmutables
- * en su constructor primario, pero checked pasa a ser una propiedad mutable que podrá ser
- * modificada desde el viewModel. La alternativa sería eliminar y añadir de nuevo un elemento cuando
- * este se modifica. Esto obliga a que la clase no pueda ser una data class.
- *
  *
  * (2) Kotlin utiliza companion objects para encapsular miembros de clase (lo que en java serían static).
  * Se trata de un objeto que acompaña a la clase y por tanto contiene todos lo miembros de clase,
