@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import java.util.concurrent.atomic.AtomicInteger
 
-class ShoppingProduct(
+data class ShoppingProduct(
     val productName: String,
     val key: Int = identifier.incrementAndGet(), // (3)
 ) {

@@ -4,12 +4,10 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
-import java.nio.file.Files.find
 
 class ShoppingListViewModel : ViewModel() {
 
     private val _list = MutableStateFlow(listOf<ShoppingProduct>())
-
     // TODO: getDummyShoppingProducts()
     val list = _list.asStateFlow()
 
