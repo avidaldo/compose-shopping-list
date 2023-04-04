@@ -1,5 +1,6 @@
 package com.example.shoppinglist.ui.state
 
+import androidx.compose.runtime.State
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -7,8 +8,8 @@ import kotlinx.coroutines.flow.update
 
 class ShoppingListViewModel : ViewModel() {
 
-    private val _list = MutableStateFlow(listOf<ShoppingProduct>())  // (1)
-    // TODO: getDummyShoppingProducts()
+    private val _list =
+        MutableStateFlow(listOf<ShoppingProduct>())  // (1) // TODO: getDummyShoppingProducts()
     val list = _list.asStateFlow()
 
     private fun add(item: ShoppingProduct) {
@@ -45,17 +46,18 @@ class ShoppingListViewModel : ViewModel() {
         _list.update { currentState ->
             currentState.toMutableList().apply {
                 find { it.key == key }?.apply {
-                    this.checked = !this.checked
-                } ?: throw RuntimeException("List element not found")
-
+                    this.copy(checked = !this.checked)
+                }
             }
         }
-    }
+    } // TODO: Ahora mismo no esta funcionando. Cambia el estado pero no recompone al no ser checked un mutableState
+
+
 
     fun changeChecked(item: ShoppingProduct) {
         _list.update { currentState ->
             currentState.toMutableList().apply {
-                    item.checked = !item.checked
+                item.checked = !item.checked
             }
         }
     }

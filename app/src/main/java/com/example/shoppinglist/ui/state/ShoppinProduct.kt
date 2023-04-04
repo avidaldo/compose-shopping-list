@@ -1,8 +1,10 @@
 package com.example.shoppinglist.ui.state
 
 
+import androidx.compose.runtime.Stable
 import java.util.concurrent.atomic.AtomicInteger
 
+@Stable
 data class ShoppingProduct(
     val productName: String,
     val key: Int = identifier.incrementAndGet(), // (3)
