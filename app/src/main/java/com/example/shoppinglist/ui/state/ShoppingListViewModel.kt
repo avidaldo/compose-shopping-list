@@ -21,13 +21,30 @@ class ShoppingListViewModel : ViewModel() {
         _list.remove(item)
     }
 
-    fun changeChecked(product: ShoppingProduct) {
+/*    fun changeChecked(product: ShoppingProduct) {  // (5)
         product.checked = !product.checked
+    }*/
+
+
+    fun changeChecked(index: Int) {
+        _list[index] = list[index].copy(checked = !list[index].checked)
     }
 
 }
 
 /**
+ *
+ * (5)
+ * Si checked no es una propiedad mutable, sus cambios no notificarán a Compose para recomposición.
+ * por tanto, será necesario crear un nuevo elemento en el indice de la lista cuyo objeto queremos
+ * modificar. No puede simplmenete modificarse el objeto sino crear uno nuevo (una nueva referencia,
+ * por tanto) que tenga los nuevos valores (los mismos que tenía y checked cambiado). Por eso ahora
+ * todas las propiedades de shoppingProduct son inmutables. No se cambiarán sino que se crearán
+ * copias de los objetos para reasignar al indice de la lista donde estaba el anterior objeto. De
+ * este modo, estamos generandom una modificación en la propia lista que sí es detectada por
+ * mutableStateList y por tanto notificada a Compose, generando una recomposición en la vista.
+ *
+ *
  * (1)
  *
  * Definimos una propiedad interna _list que solo será modificable desde dentro del ViewModel y

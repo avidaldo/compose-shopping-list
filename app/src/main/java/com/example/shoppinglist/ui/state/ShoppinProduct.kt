@@ -1,29 +1,29 @@
 package com.example.shoppinglist.ui.state
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import java.util.concurrent.atomic.AtomicInteger
 
-class ShoppingProduct(
+data class ShoppingProduct(
     val productName: String,
     val key: Int = identifier.incrementAndGet(), // (3)
+    val checked: Boolean = false   // (1)
 ) {
-    var checked by mutableStateOf(false)   // (1)
-
     companion object { // (2)
         val identifier: AtomicInteger = AtomicInteger(0)  // (3)
-
         fun getDummyShoppingProducts() =
             List(4) { i -> ShoppingProduct(productName = "Producto $i") }
     }
 }
 
 /**
- * (1) La clase ShoppingProduct tiene la definición de key y name como propiedades inmutables
- * en su constructor primario, pero checked pasa a ser una propiedad mutable que podrá ser
- * modificada desde el viewModel. La alternativa sería eliminar y añadir de nuevo un elemento cuando
- * este se modifica. Esto obliga a que la clase no pueda ser una data class.
+ * (1)
+ *
+ * Haciendo que checked deje de ser un MutableState, limpiamos la arquitectura, haciendo que
+ * el estado de la vista esté completamente en el ViewModel, mientras ShoppingProduct es una clase
+ * independiente de esta vista y totalmente reutilizable y independientemente testeable.
+ *
+ * Pero eso hace los cambios en esta propiedad dejen de ser notificados a Compose
+ * para recomponer. Por ello, declaramos esta propiedad como inmutable y cambiamos la estrategia de
+ * viewModel.changeChecked().
  *
  *
  * (2) Kotlin utiliza companion objects para encapsular miembros de clase (lo que en java serían static).
