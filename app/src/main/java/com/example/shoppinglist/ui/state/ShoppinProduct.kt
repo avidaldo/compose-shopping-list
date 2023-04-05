@@ -4,11 +4,10 @@ package com.example.shoppinglist.ui.state
 import androidx.compose.runtime.Stable
 import java.util.concurrent.atomic.AtomicInteger
 
-@Stable
 data class ShoppingProduct(
     val productName: String,
     val key: Int = identifier.incrementAndGet(), // (3)
-    var checked: Boolean = false   // (1)
+    val checked: Boolean = false   // (1)
 ) {
     companion object { // (2)
         val identifier: AtomicInteger = AtomicInteger(0)  // (3)

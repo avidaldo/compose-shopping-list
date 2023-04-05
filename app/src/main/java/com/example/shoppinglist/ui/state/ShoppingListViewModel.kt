@@ -41,7 +41,7 @@ class ShoppingListViewModel : ViewModel() {
             it.toMutableList().apply { remove(item) }
         }
     }
-
+/*
     fun changeChecked(key: Int) {
         _list.update { currentState ->
             currentState.toMutableList().apply {
@@ -50,18 +50,35 @@ class ShoppingListViewModel : ViewModel() {
                 }
             }
         }
-    } // TODO: Ahora mismo no esta funcionando. Cambia el estado pero no recompone al no ser checked un mutableState
-
-
-
-    fun changeChecked(item: ShoppingProduct) {
+    }*/
+/*
+    fun changeChecked(key: Int) {
         _list.update { currentState ->
             currentState.toMutableList().apply {
-                item.checked = !item.checked
+                val index = indexOf(find { it.key == key })
+                val newNode = this[index].copy(checked = !this[index].checked)
+                this[index] = newNode
+            }
+        }
+    }*/
+    fun changeChecked(key: Int) {
+        _list.update { currentState ->
+            currentState.toMutableList().apply {
+                val index = indexOf(find { it.key == key })
+                this[index] = this[index].copy(checked = !this[index].checked)
             }
         }
     }
 
+
+    /* fun changeChecked(item: ShoppingProduct) {
+         _list.update { currentState ->
+             currentState.toMutableList().apply {
+                 item.checked = !item.checked
+             }
+         }
+     }
+ */
 }
 
 
