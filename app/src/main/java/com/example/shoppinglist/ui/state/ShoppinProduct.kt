@@ -1,7 +1,5 @@
 package com.example.shoppinglist.ui.state
 
-
-import androidx.compose.runtime.Stable
 import java.util.concurrent.atomic.AtomicInteger
 
 data class ShoppingProduct(
@@ -18,11 +16,13 @@ data class ShoppingProduct(
 
 /**
  * (1)
- * Antes checkedState era un MutableState, pero ahora al usar StateFlow, cada vez que se cambia algo
- * se copia entera la lista forzando que se detecte el cambio de estado por compleja que sea
- * la estructura interna. De hecho, por eso se declara como List y no como MutableList; el modelo
- * de estado que recibe StateFlow debe ser inmutable para garantizar que siempre se actualice
- * creando un elemento nuevo (con update).
+ * Haciendo que checked deje de ser un MutableState, limpiamos la arquitectura, haciendo que
+ * el estado de la vista esté completamente en el ViewModel, mientras ShoppingProduct es una clase
+ * independiente de esta vista y totalmente reutilizable y independientemente testeable.
+ *
+ * Pero eso hace los cambios en esta propiedad dejen de ser notificados a Compose
+ * para recomponer. Por ello, declaramos esta propiedad como inmutable y cambiamos la estrategia de
+ * viewModel.changeChecked().
  *
  *
  * (2)
