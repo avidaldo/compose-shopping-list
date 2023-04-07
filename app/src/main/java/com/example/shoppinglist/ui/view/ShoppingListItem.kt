@@ -15,8 +15,6 @@ import com.example.listatareas.R
 @Composable
 fun ShoppingListItem(
     productName: String,
-    checked: Boolean,
-    onChangeChecked: (Boolean) -> Unit,
     onClose: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -38,10 +36,6 @@ fun ShoppingListItem(
                     .weight(1F)
                     .padding(start = 16.dp),
                 fontSize = 25.sp
-            )
-            Checkbox(
-                checked = checked,
-                onCheckedChange = onChangeChecked
             )
             IconButton(onClick = onClose) {
                 Icon(Icons.Filled.Close, contentDescription = stringResource(R.string.close))
