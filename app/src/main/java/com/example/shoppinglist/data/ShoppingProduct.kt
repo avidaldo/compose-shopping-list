@@ -1,12 +1,13 @@
-package com.example.shoppinglist.ui.state
+package com.example.shoppinglist.data
 
 import java.util.concurrent.atomic.AtomicInteger
 
 data class ShoppingProduct(
     val productName: String,
-    val key: Int = identifier.incrementAndGet(), // (3)
-    val checked: Boolean = false   // (1)
+    val checked: Boolean = false,   // (1)
 ) {
+    val key: Int = identifier.incrementAndGet() // (3)
+
     companion object { // (2)
         val identifier: AtomicInteger = AtomicInteger(0)  // (3)
         fun getDummyShoppingProducts() =

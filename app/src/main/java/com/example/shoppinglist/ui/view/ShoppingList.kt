@@ -1,11 +1,10 @@
 package com.example.shoppinglist.ui.view
 
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.example.shoppinglist.ui.state.ShoppingProduct
+import com.example.shoppinglist.data.ShoppingProduct
 
 
 @Composable

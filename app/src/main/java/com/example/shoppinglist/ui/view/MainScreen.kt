@@ -9,7 +9,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.listatareas.R
 import com.example.shoppinglist.ui.state.ShoppingListViewModel
-import com.example.shoppinglist.ui.state.ShoppingProduct
 
 @Composable
 fun MainScreen() {

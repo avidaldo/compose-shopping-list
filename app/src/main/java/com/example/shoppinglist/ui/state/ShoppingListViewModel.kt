@@ -2,6 +2,7 @@ package com.example.shoppinglist.ui.state
 
 import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
+import com.example.shoppinglist.data.ShoppingProduct
 
 class ShoppingListViewModel : ViewModel() {
     private val _list = mutableStateListOf<ShoppingProduct>()
