@@ -1,6 +1,7 @@
 package com.example.shoppinglist.ui.state
 
 import androidx.lifecycle.ViewModel
+import com.example.shoppinglist.data.ShoppingProduct
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -30,7 +31,7 @@ class ShoppingListViewModel : ViewModel() {
         _list.update { currentState ->
             currentState.toMutableList().apply {
                 find { it.key == key }?.also { remove(it) }
-                    ?: throw RuntimeException("List element not found")
+                    ?: throw RuntimeException("List element not found")  // Offensive programming
             }
         }
     }
