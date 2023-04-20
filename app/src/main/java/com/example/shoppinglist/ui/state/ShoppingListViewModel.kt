@@ -11,18 +11,19 @@ class ShoppingListViewModel : ViewModel() {
     // TODO: getDummyShoppingProducts()
     val list = _list.asStateFlow()
 
-    private fun add(item: ShoppingProduct) {
+    private fun add(item: ShoppingProduct) : Boolean{
+        var result =  false
         _list.update {
             it.toMutableList().apply {
-                add(item)
+                result = add(item)
             }
-        } // TODO: ¿cómo hago que la función devuelva el resultado del add?
+        }
+        return result
     }
 
-    fun add(productString: String) =
-        if (list.value.none { productString == it.productName }) {  // TODO: con Set
+    fun add(productString: String) : Boolean =
+        if (list.value.none { productString == it.productName }) {
             add(ShoppingProduct(productString))
-            true
         } else false
 
 
