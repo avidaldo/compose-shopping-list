@@ -7,16 +7,17 @@ import kotlinx.coroutines.flow.update
 
 class ShoppingListViewModel : ViewModel() {
 
-    private val _list =  MutableStateFlow(setOf<String>())
+    private val _list = MutableStateFlow(setOf<String>())
     val list = _list.asStateFlow()
 
     fun add(item: String) : Boolean {
+        var result = false
         _list.update {
             it.toMutableSet().apply {
-                return@add add(item)
+                result = add(item)
             }
         }
-        return false
+        return result
     }
 
     fun remove(item: String) {
