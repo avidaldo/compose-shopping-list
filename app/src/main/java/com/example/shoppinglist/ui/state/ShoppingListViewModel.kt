@@ -55,14 +55,15 @@ class ShoppingListViewModel : ViewModel() {
 }
 
 /**
+ *
  * (1)
  * Dentro del StateFlow, se declara como List y no como MutableList; el modelo
  * de estado que recibe StateFlow debe ser inmutable para garantizar que siempre se actualice
  * creando un objeto nuevo (con update).
  *
  * Si checked no es una propiedad mutable, sus cambios no notificarán a Compose para recomposición.
- * por tanto, será necesario crear un nuevo elemento en el indice de la lista cuyo objeto queremos
- * modificar. No puede simplmenete modificarse el objeto sino crear uno nuevo (una nueva referencia,
+ * por tanto, será necesario crear un nuevo elemento en el índice de la lista cuyo objeto queremos
+ * modificar. No puede simplemente modificarse el objeto sino crear uno nuevo (una nueva referencia,
  * por tanto) que tenga los nuevos valores (los mismos que tenía y checked cambiado). Por eso ahora
  * todas las propiedades de shoppingProduct son inmutables. No se cambiarán sino que se crearán
  * copias de los objetos para reasignar al indice de la lista donde estaba el anterior objeto. De
