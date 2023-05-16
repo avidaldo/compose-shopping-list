@@ -20,7 +20,7 @@ data class ShoppingProduct(
  *
  * Haciendo que checked deje de ser un MutableState, limpiamos la arquitectura, haciendo que
  * el estado de la vista esté completamente en el ViewModel, mientras ShoppingProduct es una clase
- * independiente de esta vista y totalmente reutilizable y independientemente testeable.
+ * independiente de esta vista, totalmente reutilizable e independientemente testeable.
  *
  * Pero eso hace los cambios en esta propiedad dejen de ser notificados a Compose
  * para recomponer. Por ello, declaramos esta propiedad como inmutable y cambiamos la estrategia de

@@ -7,7 +7,7 @@ import com.example.shoppinglist.data.ShoppingProduct
 class ShoppingListViewModel : ViewModel() {
     private val _list = mutableStateListOf<ShoppingProduct>()
     //    .apply { addAll(getDummyShoppingProducts()) }  // (2)
-    val list get() = _list  // (1)
+    val list: List<ShoppingProduct> get() = _list  // (1)
 
     private fun add(item: ShoppingProduct) =
         _list.add(item) // (3)
@@ -56,6 +56,7 @@ class ShoppingListViewModel : ViewModel() {
  *
  * https://developer.android.com/codelabs/jetpack-compose-state#11
  * https://stackoverflow.com/a/68016417
+ * https://stackoverflow.com/questions/68261797/private-setter-vs-backing-property-in-kotlin
  *
  *
  * (2)
