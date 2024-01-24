@@ -25,7 +25,7 @@ fun AddBlock(
     val focusManager = LocalFocusManager.current
 
     Row(
-        Modifier
+        modifier
             .fillMaxWidth()
             .padding(10.dp),
         verticalAlignment = Alignment.CenterVertically,
